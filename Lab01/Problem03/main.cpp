@@ -13,6 +13,7 @@ int main() {
     int nGrades = 0;
     double sum = 0;
     int grade  = 0;
+    
     while(cin >> grade) {
         ++nGrades;
         sum += grade;
