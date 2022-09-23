@@ -10,29 +10,29 @@ int main()
 {
     iostream::sync_with_stdio(false);
 
-
-    int numTestCase;
+int numTestCase;
     cin >> numTestCase;
-    int row = 1;
+    //int row = 1;
     int amount = 0;
     int numOfSoldiers;
+    int decrease = 1;
     for(int i = 0; i < numTestCase; i++) {
         cin >> numOfSoldiers;
 
-        int decrease = 1;
-        //TODO
-        while(numOfSoldiers != 1 || numOfSoldiers <= 0) {
+        while(numOfSoldiers >= 1 ) {
+            if (decrease > numOfSoldiers) break;
             numOfSoldiers -= decrease;
             decrease++;
             amount++;
 
         }
-        cout << row;
+        cout << amount << endl;
+        amount = 0;
+        decrease = 1;
+
+
+
+
+
     }
-
-
-
-
-
-
 }
