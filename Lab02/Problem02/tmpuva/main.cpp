@@ -13,15 +13,13 @@ int main()
   int numTestCase;
     cin >> numTestCase;
     int row;
-    for(int i = 0; i < numTestCase; i++) {
-        int numSoldiers;
-        cin >> numSoldiers;
-        while(numSoldiers > 1) {
-            row = (int) (-1 + sqrt(1+ 8*numSoldiers));
-            cout << row;
-        }
-        
-        
-    }
+    for(int i = numTestCase; i > 0; i--) {
 
+            int numSoldiers;
+            cin >> numSoldiers;
+            row = (int) (-1 + (sqrt(1+ 8 * numSoldiers))) / 2;
+            cout << row << endl;
+
+    }
+    
     }
