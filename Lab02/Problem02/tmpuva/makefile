@@ -2,7 +2,7 @@
 src = $(wildcard *.cpp)
 hdr = $(wildcard *.cpp)
 
-CXXFLAGS = -g -std=c++11 -Wall -Wextra -Wshadow -padantic -D_GlIBCXX_DEBUG -fsanitize=address -fsanitize=undefined
+CXXFLAGS = -g -std=c++11 -Wall -Wextra -Wshadow -pedantic -D_GlIBCXX_DEBUG -fsanitize=address -fsanitize=undefined
 CXXRLSFLAGS = -O2 -std=c++11 -Wall -Wextra -Wshadow -pedantic
 
 main: $(src) $(hdr)

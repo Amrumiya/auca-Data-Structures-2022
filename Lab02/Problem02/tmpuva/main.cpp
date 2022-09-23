@@ -9,30 +9,32 @@ using namespace std;
 int main()
 {
     iostream::sync_with_stdio(false);
-
-int numTestCase;
+ int numTestCase;
     cin >> numTestCase;
     //int row = 1;
-    int amount = 0;
+    int amount[] = {0,0,0,0,0,0};
     int numOfSoldiers;
     int decrease = 1;
+    int Arr[6];
     for(int i = 0; i < numTestCase; i++) {
         cin >> numOfSoldiers;
+        Arr[i] = numOfSoldiers;
+    }
 
-        while(numOfSoldiers >= 1 ) {
-            if (decrease > numOfSoldiers) break;
-            numOfSoldiers -= decrease;
+    for(int i = 0; i < (sizeof(Arr) / sizeof(Arr[0])); i++) {
+        if (i == 7) break;
+        while (Arr[i] >= 1) {
+            if (decrease > Arr[i]) break;
+            Arr[i] -= decrease;
             decrease++;
-            amount++;
+            amount[i]++;
 
         }
-        cout << amount << endl;
-        amount = 0;
         decrease = 1;
-
-
+    }
+    for(int i = 0; i < (sizeof(Arr) / sizeof(Arr[0])); i++)
+        cout << amount[i] << endl;
 
 
 
     }
-}
