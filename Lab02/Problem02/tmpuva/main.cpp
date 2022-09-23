@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include <bits/stdc++.h>
 
 template <typename C>
@@ -10,16 +10,14 @@ int main()
 {
     iostream::sync_with_stdio(false);
   
-  int numTestCase;
-    cin >> numTestCase;
-    int row;
-    for(int i = numTestCase; i > 0; i--) {
-
-            int numSoldiers;
-            cin >> numSoldiers;
-            row = (int) (-1 + (sqrt(1+ 8 * numSoldiers))) / 2;
-            cout << row << endl;
-
+     int testCases;
+    cin >> testCases;
+    while (testCases--)
+    {
+        long n;
+        cin >> n;
+        cout << (long)(-1 + (sqrt(1 + 8 * n))) / 2 << endl;
     }
-    
+
+
     }
