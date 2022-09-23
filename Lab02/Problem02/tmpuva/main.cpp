@@ -21,7 +21,7 @@ int main()
         Arr[i] = numOfSoldiers;
     }
 
-    for(int i = 0; i < (sizeof(Arr) / sizeof(Arr[0])); i++) {
+    for(int i = 0; i < 6; i++) {
         if (i == 7) break;
         while (Arr[i] >= 1) {
             if (decrease > Arr[i]) break;
@@ -32,8 +32,8 @@ int main()
         }
         decrease = 1;
     }
-    for(int i = 0; i < (sizeof(Arr) / sizeof(Arr[0])); i++)
-        cout << amount[i] << endl;
+    for(int i : amount)
+        cout << i << endl;
 
 
 
