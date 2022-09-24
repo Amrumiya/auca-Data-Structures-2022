@@ -12,17 +12,19 @@ int main()
 
     int firstChannel, secondChannel;
 
-    int result;
+    int firstResult;
+    int secondResult;
     while (cin >> firstChannel >> secondChannel) {
         if (firstChannel && secondChannel == -1) break;
-        if(firstChannel == 0) {
-            firstChannel = 100;
-            result = firstChannel - secondChannel;
+        if(firstChannel  > secondChannel) {
+            int temp = firstChannel;
+            firstChannel = secondChannel;
+            secondChannel = temp;
         }
-        else {
-             result = secondChannel - firstChannel;
-        }
-        cout << result << endl;
+
+        firstResult = secondChannel - firstChannel;
+        secondResult  = 100 - secondChannel + firstChannel ;
+        cout << min(firstResult,secondResult) << endl;
     }
 
 }
