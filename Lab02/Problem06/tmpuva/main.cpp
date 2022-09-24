@@ -11,24 +11,18 @@ int main()
     iostream::sync_with_stdio(false);
 
      int numTestCase;
-    cin >> numTestCase;
+     cin >> numTestCase;
 
     int firstSalary, secondSalary, thirdSalary;
+    int Arr[3];
     for (int i = 0; i < numTestCase; i++) {
         while (cin >> firstSalary >> secondSalary >> thirdSalary) {
-            
-            string first = to_string(firstSalary);
-            string second = to_string(secondSalary);
-            string third = to_string(thirdSalary);
+            Arr[0] = firstSalary;
+            Arr[1] = secondSalary;
+            Arr[2] = thirdSalary;
+            sort(begin(Arr), end(Arr));
 
-            int average = (firstSalary + secondSalary + thirdSalary) / 3;
-            if(average != firstSalary && average != secondSalary && average && thirdSalary) {
-                string av = to_string(average);
-                if (av[0] == first[0]) average = firstSalary;
-                else if(av[0] == second[0])  average = secondSalary;
-                else average = thirdSalary;
-            }
-            cout << average << '\n';
+            cout << Arr[1] << '\n';
         }
     }
 
