@@ -19,8 +19,9 @@ int main()
     if((road && integ) == 0) {
         break;
     }
+    road--;
     devisor = road  / integ;
-    --road;
+    
     if(devisor > 26) {
         cout << "Case " << increment++ <<": " << "impossible" <<'\n';
     } else {
