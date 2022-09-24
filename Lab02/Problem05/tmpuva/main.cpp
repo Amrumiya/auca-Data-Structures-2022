@@ -14,7 +14,7 @@ int main()
     for (int i = 1; cin >> numOfRoads >> Integers;) {
         if ((numOfRoads && Integers) == 0) break;
         if (numOfRoads % 2 != 0 || Integers % 2 != 0) {
-         reminder = numOfRoads % Integers;
+         reminder = numOfRoads / Integers;
     }
     else {
         reminder = numOfRoads / Integers;
