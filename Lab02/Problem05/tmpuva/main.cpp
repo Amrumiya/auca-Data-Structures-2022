@@ -13,24 +13,15 @@ int main()
  int numOfRoads, Integers, reminder;
     for (int i = 1; cin >> numOfRoads >> Integers;) {
         if ((numOfRoads && Integers) == 0) break;
-        if (numOfRoads % 2 != 0 || Integers % 2 != 0) {
-         reminder = numOfRoads / Integers;
-    }
-    else {
-        reminder = numOfRoads / Integers;
-    }
-    if (reminder > 27) {
+        numOfRoads--;
+            reminder = numOfRoads / Integers;
+    if (reminder > 26) {
         cout << "Case " << i << ": " << "impossible" << endl;
         i++;
     }
-   else if (reminder <= numOfRoads) {
-        cout << "Case " << i << ": " << 1 << endl;
+   else if (reminder < numOfRoads) {
+        cout << "Case " << i << ": " << reminder << endl;
         i++;
+        }
     }
-
-}
-
-
-
-
 }
