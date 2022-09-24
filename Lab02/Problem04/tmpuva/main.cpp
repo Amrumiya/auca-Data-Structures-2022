@@ -24,8 +24,8 @@ int main()
         string toString = to_string(total);
         int length = toString.length();
         //cout << toString.substr(length - 2, 0, length - 1,length);
-         cout << toString[length - 2];
-       // printf("%c\n", toString[length - 2]);
+         //cout << toString[length - 2];
+        printf("%c\n", toString[length - 2]);
     }
 
 
