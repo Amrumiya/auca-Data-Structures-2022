@@ -10,18 +10,34 @@ int main()
 {
     iostream::sync_with_stdio(false);
 
- int numOfRoads, Integers, reminder;
-    for (int i = 1; cin >> numOfRoads >> Integers;) {
-        if ((numOfRoads && Integers) == 0) break;
-        numOfRoads--;
-            reminder = numOfRoads / Integers;
-    if (reminder > 26) {
-        cout << "Case " << i << ": " << "impossible" << endl;
-        i++;
+ int road, integ, devisor;
+ int increment = 1;
+
+
+ while(cin >> road >> integ) {
+
+    if((road && integ) == 0) {
+        break;
     }
-   else if (reminder < numOfRoads) {
-        cout << "Case " << i << ": " << reminder << endl;
-        i++;
-        }
+    devisor = road  / integ;
+    --road;
+    if(devisor > 26) {
+        cout << "Case " << increment++ <<": " << "impossible" <<'\n';
+    } else {
+        cout << "Case " << increment++ << ": " << devisor << '\n';
     }
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
