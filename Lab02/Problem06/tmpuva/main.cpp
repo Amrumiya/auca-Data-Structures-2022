@@ -15,7 +15,8 @@ int main()
 
     int firstSalary, secondSalary, thirdSalary;
     int Arr[3];
-    for (int i = 0; i < numTestCase; i++) {
+    while (numTestCase--) {
+    if(numTestCase < 0) break;
         while (cin >> firstSalary >> secondSalary >> thirdSalary) {
             Arr[0] = firstSalary;
             Arr[1] = secondSalary;
