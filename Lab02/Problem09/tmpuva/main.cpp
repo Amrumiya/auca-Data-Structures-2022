@@ -10,25 +10,22 @@ int main()
 {
     iostream::sync_with_stdio(false);
 
-
-    int numTestCase;
-    cin >> numTestCase;
-
-    while (numTestCase != 0) {
+   int NumTestCase;
+    cin >> NumTestCase;
+    int increment = 0;
+    while(increment < NumTestCase) {
         int NumOfStores;
         cin >> NumOfStores;
-        int minimum = 90;
-        int maximum = 1;
-       for(int  j = 0; j < NumOfStores; j++) {
-            int NumberOfParks;
-            cin >> NumberOfParks;
+        int Minimum = 90;
+        int Maximum = -1;
+        for (int j = 0; j < NumOfStores; ++j) {
+            int NumOfParks;
+            cin >> NumOfParks;
 
-            minimum = min(minimum, NumberOfParks);
-            maximum = max(maximum, NumberOfParks);
+            Minimum = (Minimum < NumOfParks) ? Minimum = Minimum : Minimum = NumOfParks;
+            Maximum = (NumOfParks > Maximum) ? Maximum = NumOfParks : Maximum = Maximum;
         }
-        cout << (maximum - minimum) << "\n";
+        cout << (Maximum - Minimum) * 2 << '\n';
+        increment++;
     }
-
-
-
 }
