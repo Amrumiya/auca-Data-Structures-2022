@@ -4,26 +4,31 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
+    const string NoDataMessage = "no data";
+    const int colomnWidth = 30;
 
-    string name;
-    cin >> name;
-
+    for(string name; cin >> name;) {
 
     int nGrades = 0;
     double sum = 0;
-    int grade  = 0;
-    
-    while(cin >> grade) {
+    int grade = 0;
+
+    for (int grade; cin >> grade;) {
         ++nGrades;
         sum += grade;
-
     }
-
-cout << setfill('.') << fixed << setprecision(2);
-
-cout <<left << setw(30) << name << "|" << right << setw(30) << sum / nGrades << '\n';
-
-
-
+    // setfill()
+    cout << setfill('.') << fixed << setprecision(2);
+    if(nGrades != 0) {
+    
+    cout << left << setw(colomnWidth) << name << "|" << right << setw(colomnWidth) << sum / nGrades << '\n';
+    
+    } else {
+        cout << left << setw(colomnWidth) << name << "|" << right << setw(colomnWidth) << NoDataMessage << '\n';
+    }
+    // fixed is
+    cin.clear();
+    }
 }
