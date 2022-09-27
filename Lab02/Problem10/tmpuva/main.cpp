@@ -7,55 +7,28 @@ int sz(const C &c) { return static_cast<int>(c.size()); }
 using namespace std;
 
 int main() {
-    int sum = 0;
-    int sum2 = 0;
-    string txt;
-    string msg;
-    int ratio1;
-    int ratio2;
-    while (cin >> txt) {
-            cin >> msg;
-        for (int i = 0; i < txt.length(); i++) {
-            char ch = txt[i];
-            if (ch >= 97 && ch <= 122) {
-                int code = ch - 96;
-                sum += code;
-            } else {
-                int code = ch - 64;
-                sum += code;
-            }
-        }
-//     //   char c = txt[0];
-//      //  if (c >= 97 && c <= 122) {
-//            for (int i = 0; i < txt.length(); i++) {
-//                char d = txt[i];
-//                int code = d - 96;
-//                sum += code;
-//            }
-//        } else {
-//            for (int i = 0; i < txt.length(); i++) {
-//                char ch = txt[i];
-//                int code = ch - 64;
-//                sum += code;
-//            }
-//        }
-        for (int j = 0; j < msg.length(); j++) {
-            char i = msg[j];
-            if (i >= 97 && i <= 122) {
-                int code = i - 96;
-                sum2 += code;
-            } else {
-                int code = i - 64;
-                sum2 += code;
-            }
-        }
-        ratio1 = (sum % 9 == 0) ? ratio1 = 9 : ratio1 = sum % 9;
-        ratio2 = (sum2 % 9 == 0) ? ratio2 = 9 : ratio2 = sum2 % 9;
-        sum = 0;
-        sum2 = 0;
+   
+    int NumTestCase;
+    cin >> NumTestCase;
+    for (int k = 1; k <= NumTestCase; k++) {
+        int Num;
+        cin >> Num;
 
-        double totalRatio = min((double) ratio1 / ratio2, (double) ratio2 / ratio1);
-      //  printf("%.2f%\n", totalRatio * 100);
-         cout << totalRatio * 100 << '\n';
+        int ArrWall[50];
+        for (int i = 0; i < Num; i++)
+            cin >> ArrWall[i];
+
+        int LeftIncrement = 0, RightIncrement = 0;
+        for (int i = 0; i < Num - 1; i++) {
+            if (ArrWall[i + 1] < ArrWall[i])
+                RightIncrement++;
+            if (ArrWall[i + 1] > ArrWall[i])
+
+                LeftIncrement++;
+        }
+        cout << "Case " << k << ": " << LeftIncrement << " " << RightIncrement << endl;
+
     }
-}
+
+
+    }
