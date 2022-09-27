@@ -15,7 +15,7 @@ int main()
     while (testCases--)
     {
         long n;
-        cin >> n;
+        cin  >> n;
         cout << (long)(-1 + (sqrt(1 + 8 * n))) / 2 << endl;
     }
 }
