@@ -11,7 +11,6 @@ int main() {
     int sum2 = 0;
     string txt;
     string msg;
-    int m = 1;
     int ratio1;
     int ratio2;
     while (cin >> txt) {
@@ -56,6 +55,7 @@ int main() {
         sum2 = 0;
 
         double totalRatio = min((double) ratio1 / ratio2, (double) ratio2 / ratio1);
-        printf("%.2f%\n", totalRatio * 100);
+      //  printf("%.2f%\n", totalRatio * 100);
+         cout << totalRatio * 100 << '\n';
     }
 }
