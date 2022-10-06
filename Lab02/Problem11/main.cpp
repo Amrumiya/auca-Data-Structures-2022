@@ -64,11 +64,11 @@ int main()
 
         double totalRatio = min((double) ratio1 / ratio2, (double) ratio2 / ratio1);
         // printf("%.2f", totalRatio * 100);
-        cout << fixed << setprecision(2) << totalRatio * 100 << " %" << '\n';
+        cout << fixed << setprecision(2) << totalRatio * 100 << " %" <<endl;
     }
 
 
 
-
+cout << '\n';
 
 }
