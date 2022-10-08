@@ -7,16 +7,19 @@ int sz(const C &c) { return static_cast<int>(c.size()); }
 using namespace std;
 
 bool Check(vector<int> numbers) {
-    int Ordered = 0;
-for(int i = 0; i < sz(numbers); i++) {
 
-    if(i == 9) break;
-    if(numbers[i] > numbers[i + 1] || (numbers[i] < numbers[i + 1] && numbers[i + 1] < numbers[i + 2])) Ordered++;
-    if(numbers[i] > numbers[i + 1] && numbers[i + 1] < numbers[i + 2]) return false;
+//for(int i = 0; i < sz(numbers); i++) {
+   //if(numbers[i] > numbers[i+1]);
+   //else if(numbers[i] > numbers[i + 1] && numbers[i + 1] < numbers[ i + 2] ) return false;
+   //else if(numbers[i] < numbers[i + 1]){};
+   // }
 
-    }
+   if(numbers[0] > numbers[1] && numbers[1] < numbers[2]) return false;
 
-    return Ordered > 6; 
+    return (numbers[0] > numbers[1] && numbers[1] > numbers[2] && numbers[2] > numbers[3]
+   && numbers[3] > numbers[4] && numbers[4] > numbers[5] && numbers[5] > numbers[6]) || (numbers[0] < numbers[1] && 
+   numbers[1] < numbers[2] && numbers[2] < numbers[3]
+   && numbers[3] < numbers[4] && numbers[4] < numbers[5] && numbers[5] < numbers[6]); 
 }
 
 int main()
@@ -25,7 +28,7 @@ int main()
 
     int numTestCase;
     cin >> numTestCase;
-    cout << "Lumberjacks:" << '\n';
+    cout << "Lumberjacks: " << '\n';
     for(int i = 0; i < numTestCase; i++) {
 
         vector<int> numbers;
