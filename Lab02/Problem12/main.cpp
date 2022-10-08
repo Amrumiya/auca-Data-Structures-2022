@@ -20,10 +20,6 @@ void computeDigits(int n , int &sum , int &count) {
 }
 
 
-
-
-
-
 int solve(int n) {
 
     int sumOfDigigts;

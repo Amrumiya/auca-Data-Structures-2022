@@ -6,21 +6,7 @@ int sz(const C &c) { return static_cast<int>(c.size()); }
 
 using namespace std;
 
-bool Check(vector<int> numbers) {
 
-//for(int i = 0; i < sz(numbers); i++) {
-   //if(numbers[i] > numbers[i+1]);
-   //else if(numbers[i] > numbers[i + 1] && numbers[i + 1] < numbers[ i + 2] ) return false;
-   //else if(numbers[i] < numbers[i + 1]){};
-   // }
-
-   if(numbers[0] > numbers[1] && numbers[1] < numbers[2]) return false;
-
-    return (numbers[0] > numbers[1] && numbers[1] > numbers[2] && numbers[2] > numbers[3]
-   && numbers[3] > numbers[4] && numbers[4] > numbers[5] && numbers[5] > numbers[6]) || (numbers[0] < numbers[1] && 
-   numbers[1] < numbers[2] && numbers[2] < numbers[3]
-   && numbers[3] < numbers[4] && numbers[4] < numbers[5] && numbers[5] < numbers[6]); 
-}
 
 int main()
 {
@@ -31,16 +17,23 @@ int main()
     cout << "Lumberjacks: " << '\n';
     for(int i = 0; i < numTestCase; i++) {
 
-        vector<int> numbers;
-        int num;
+        vector<int> numbers (10);
+    
 
         for(int j = 0; j < 10; j++) {
-            cin >> num;
-            numbers.push_back(num);
+            cin >> numbers[j];
         }
 
-        if(Check(numbers)) cout << "Ordered" << '\n';
-        else cout << "Unordered" << '\n';
+        for(int j = 0; j < sz(numbers) - 1; j++) {
+
+                if(numbers[j] > numbers[j + 1]) {
         
+                    reverse(numbers.begin(), numbers.end());
+                }
+        }
+        
+        int Sorted = is_sorted(begin(numbers), end(numbers));
+
+        cout << (Sorted == 1 ? "Ordered\n" : "Unordered\n");
     }
 }

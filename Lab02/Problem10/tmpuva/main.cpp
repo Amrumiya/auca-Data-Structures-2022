@@ -7,7 +7,6 @@ int sz(const C &c) { return static_cast<int>(c.size()); }
 using namespace std;
 
 int main() {
-   
     int NumTestCase;
     cin >> NumTestCase;
     for (int k = 1; k <= NumTestCase; k++) {
