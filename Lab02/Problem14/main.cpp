@@ -14,7 +14,8 @@ int main()
 
     int numTestCase;
     cin >> numTestCase;
-    cout << "Lumberjacks: " << endl;
+    cout << "Lumberjacks:" << endl;
+    
     for(int i = 0; i < numTestCase; i++) {
 
         vector<int> numbers (10);
