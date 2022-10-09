@@ -10,21 +10,14 @@ int main()
 {
     iostream::sync_with_stdio(false);
 
- vector<string> messages(16);
-    string birthday = " Happy birthday to you! Happy birthday to you! Happy birthday to Rujia! Happy birthday to you!!!";
+  vector<string> song = {"Happy", "birthday", "to", "you", "Happy", "birthday", "to", "you",
+                           "Happy", "birthday", "to", "Rujia", "Happy", "birthday", "to", "you"};
 
-    int j = 0;
-    stringstream ssin(birthday);
-    while (ssin.good() && j < 16) {
-        ssin >> messages[j];
-        ++j;
-    }
+    int input;
+    cin >> input;
+    vector<string> NumPeople(input);
 
-    int n;
-    cin >> n;
-    vector<string> nPeople(n);
-
-    for (auto &e : nPeople)
+    for (auto &e : NumPeople)
     {
         cin >> e;
     }
@@ -35,13 +28,13 @@ int main()
 
     for (;;)
     {
-        cout << nPeople[person] << ": " << messages[word] << "\n";
-        if (person == n - 1)
+        cout << NumPeople[person] << ": " << song[word] << "\n";
+        if (person == input - 1)
         {
             isDone = true;
         }
 
-        if (word == (int) sz(messages) - 1 && isDone)
+        if (word == sz(song) - 1 && isDone)
         {
             break;
         }
@@ -49,11 +42,11 @@ int main()
         ++person;
         ++word;
 
-        if (person == n)
+        if (person == input)
         {
             person = 0;
         }
-        if (word == sz(messages))
+        if (word == sz(song))
         {
             word = 0;
         }
