@@ -41,7 +41,7 @@ int main()
             isDone = true;
         }
 
-        if (word == (int) messages.size() - 1 && isDone)
+        if (word == (int) sz(messages) - 1 && isDone)
         {
             break;
         }
@@ -53,7 +53,7 @@ int main()
         {
             person = 0;
         }
-        if (word == (int)messages.size())
+        if (word == sz(messages))
         {
             word = 0;
         }
