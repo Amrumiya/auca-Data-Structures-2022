@@ -33,7 +33,7 @@ int main()
         int max = Search(rank);
 
         cout << "Case #" << i << ":" <<  endl;
-        for (int k = 0; k < (int) rank.size(); k++) {
+        for (int k = 0; k < sz(rank); k++) {
             if (rank[k] == max)
                 cout << text[k] << '\n';
         }
