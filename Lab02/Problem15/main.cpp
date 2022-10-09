@@ -18,7 +18,7 @@ int Search(vector<int> num) {
 int main()
 {
     iostream::sync_with_stdio(false);
-  int numTestCase;
+    int numTestCase;
     cin >> numTestCase;
 
     for (int i = 1; i <= numTestCase; i++) {
