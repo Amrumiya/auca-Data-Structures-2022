@@ -10,16 +10,7 @@ int main()
 {
     iostream::sync_with_stdio(false);
 
- int people;
-    cin >> people;
-
-    vector<string> NumOfPeople(people);
-
-    for (auto &e: NumOfPeople) {
-        cin >> e;
-    }
-
-    vector<string> messages(16);
+ vector<string> messages(16);
     string birthday = " Happy birthday to you! Happy birthday to you! Happy birthday to Rujia! Happy birthday to you!!!";
 
     int j = 0;
@@ -28,30 +19,43 @@ int main()
         ssin >> messages[j];
         ++j;
     }
-     int person = 0;
+
+    int n;
+    cin >> n;
+    vector<string> nPeople(n);
+
+    for (auto &e : nPeople)
+    {
+        cin >> e;
+    }
+
+    int person = 0;
     int word = 0;
-    bool isDone;
-    for (;;) {
-        cout << messages[person] << ": " << messages[word] << "\n";
-         if (person == people - 1) {
+    bool isDone = false;
+
+    for (;;)
+    {
+        cout << nPeople[person] << ": " << messages[word] << "\n";
+        if (person == n - 1)
+        {
             isDone = true;
         }
 
-        if (word == (int) messages.size() - 1 && isDone) {
+        if (word == (int) messages.size() - 1 && isDone)
+        {
             break;
         }
 
         ++person;
         ++word;
 
-        if (person == people) {
+        if (person == n)
+        {
             person = 0;
         }
-        if (word == (int) messages.size()) {
+        if (word == (int)messages.size())
+        {
             word = 0;
         }
     }
-
-
-    return 0;
 }   
