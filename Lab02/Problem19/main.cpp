@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 
 template <typename C>
@@ -9,26 +8,31 @@ using namespace std;
 int main()
 {
     iostream::sync_with_stdio(false);
-    
-   int numTestCase;
-   string line;
-   cin >> numTestCase;
-    for(int i = 0; i < numTestCase; i ++) {
-        getline(cin,line);
 
+
+    const int FirstCharacter = 0;
+    const int SecondCharacter = 1;
+
+
+    string line;
+    getline(cin, line);
+    int TestCase = stoi(line);
+
+    for(int i = 0; i < TestCase; i++ )
+    {
+        getline(cin, line);
         istringstream sinp(line);
         int countM = 0;
         int countF = 0;
-        int cnt = 0;
+        int cnt    = 0;
 
         for (string l; sinp >> l;)
         {
+            countM += l[FirstCharacter]  == 'M';
+            countM += l[SecondCharacter] == 'M';
 
-            countM += l[0] == 'M';
-            countM += l[1] == 'M';
-
-            countF += l[0] == 'F';
-            countF += l[1] == 'F';
+            countF += l[FirstCharacter]  == 'F';
+            countF += l[SecondCharacter] == 'F';
             cnt++;
         }
 
