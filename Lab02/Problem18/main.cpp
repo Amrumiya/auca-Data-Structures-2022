@@ -42,11 +42,13 @@ int main()
             {
                 Take+= binary_search(categCourses.begin(), categCourses.end(), course);
             }
-        if(Take < mReq) {
+
+            if(Take < mReq) {
             hasPassed = false;
         }
-        }
-        cout << (hasPassed ? "Yes\n" : "No\n");
+
+     }
+        cout << (hasPassed ? "yes\n" : "no\n");
 
     }
 }
