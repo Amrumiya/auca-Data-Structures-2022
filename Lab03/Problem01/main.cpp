@@ -27,7 +27,7 @@ void printDeck(const vector<int> &deck) {
 
         for(auto card : deck) {
 
-        cout << rank[card % 13] << "of " << suits[card / 13] << "\n";
+        cout << rank[card % 13] << " of " << suits[card / 13] << "\n";
         }
 
 }
