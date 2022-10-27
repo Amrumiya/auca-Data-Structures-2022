@@ -6,6 +6,7 @@ int sz(const C &c) { return static_cast<int>(c.size()); }
 
 using namespace std;
 
+
     class Computer{
             vector<int> registers;
             vector<int> memory;
@@ -15,7 +16,7 @@ using namespace std;
         Computer()
                 : registers(10, 0), memory(1000, 0), instructionPointer(0){}
 
-        void check()
+        void read()
         {
             int counter = 0;
             for(string line; getline(cin, line) && !line.empty();)
@@ -24,7 +25,7 @@ using namespace std;
                 ++counter;
             }
         }
-        int GoThrough() 
+        int run() 
         {
             int res = 0;
             
@@ -42,39 +43,23 @@ using namespace std;
                 }
                 switch (d2)
                 {
-                    case 0:  if(registers[d0] != 0) {
-                    instructionPointer = registers[d1];
-                     }else{++instructionPointer; }
+                    case 0: instruction0(d1, d0);
                     break;
-                    case 2: registers[d1] = d0;
-                         registers[d1] %= 1000;
-                        ++instructionPointer;
+                    case 2: instruction2(d1, d0);
                     break;
-                    case 3:  registers[d1] += d0;
-                             registers[d1] %= 1000;
-                             ++instructionPointer;
+                    case 3: instruction3(d1,  d0);
                     break;
-                    case 4: registers[d1] *= d0;
-                            registers[d1] %= 1000;
-                             ++instructionPointer;
+                    case 4: instruction4(d1, d0);
                     break;
-                    case 5: registers[d1] = registers[d0];
-                            ++instructionPointer;
+                    case 5: instruction5(d1, d0);
                     break;
-                    case 6: registers[d1] += registers[d0];
-                            registers[d1] %= 1000;
-                            ++instructionPointer;
+                    case 6: instruction6(d1, d0);
                     break;
-                    case 7: registers[d1] *= registers[d0];
-                            registers[d1] %= 1000;
-                            ++instructionPointer;
+                    case 7: instruction7(d1, d0);
                     break;
-                    case 8: registers[d1] = memory[registers[d0]];
-                            registers[d1] %= 1000;
-                            ++instructionPointer;
+                    case 8: instruction8(d1, d0);
                     break;
-                    case 9: memory[registers[d0]] = registers[d1];
-                            ++instructionPointer;
+                    case 9: instruction9(d1, d0); 
                     break;
                 
                 }
@@ -90,6 +75,61 @@ using namespace std;
         d2 = instruction % 10;
         
         }
+
+
+        void instruction2(int d1, int d0) {
+            registers[d1] = d0;
+            registers[d1] %= 1000;
+            ++instructionPointer;
+        }
+         void instruction3(int d1, int d0) {
+            registers[d1] += d0;
+            registers[d1] %= 1000;
+
+            ++instructionPointer;
+
+        }
+         void instruction4(int d1, int d0) {
+            registers[d1] *= d0;
+            registers[d1] %= 1000;
+            ++instructionPointer;
+
+        }
+         void instruction5(int d1, int d0) {
+            registers[d1] = registers[d0];
+            ++instructionPointer;
+
+        }
+         void instruction6(int d1, int d0) {
+            registers[d1] += registers[d0];
+            registers[d1] %= 1000;
+            ++instructionPointer;
+
+        }
+         void instruction7(int d1, int d0) {
+            registers[d1] *= registers[d0];
+            registers[d1] %= 1000;
+            ++instructionPointer;
+
+        }
+         void instruction8(int d1, int d0) {
+            registers[d1] = memory[registers[d0]];
+            registers[d1] %= 1000;
+            ++instructionPointer;
+
+        }
+         void instruction9(int d1, int d0) {
+            memory[registers[d0]] = registers[d1];
+            ++instructionPointer;
+
+        }
+         void instruction0(int d1, int d0) {
+            if(registers[d0] != 0) {
+                    instructionPointer = registers[d1];
+                 }else{     ++instructionPointer;
+                 }
+            
+        }
     };
 
     int main() 
@@ -99,13 +139,12 @@ using namespace std;
         int numTestCase;
         cin >> numTestCase >> ws;
 
-        for(int i = 0; i < numTestCase; i++) {
-                
+        for(int test = 0; test < numTestCase; test++) {
                 Computer comp;
 
-                comp.check();
+                comp.read();
         
-        cout << comp.GoThrough() << "\n";
+        cout << comp.run() << "\n";
         cout << '\n';
         }
     }
