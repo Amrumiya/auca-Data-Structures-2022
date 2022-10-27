@@ -126,9 +126,9 @@ using namespace std;
          void instruction0(int d1, int d0) {
             if(registers[d0] != 0) {
                     instructionPointer = registers[d1];
-                 }else{     ++instructionPointer;
+                 }else{     
+                    ++instructionPointer;
                  }
-            
         }
     };
 
@@ -144,8 +144,10 @@ using namespace std;
 
                 comp.read();
         
-        cout << comp.run() << "\n";
+        cout << comp.run()<< endl;
         cout << '\n';
+    
+        
         }
     }
 
