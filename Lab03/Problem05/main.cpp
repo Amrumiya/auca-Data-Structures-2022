@@ -106,6 +106,7 @@ using namespace std;
                 comp.check();
         
         cout << comp.GoThrough() << "\n";
+        cout << '\n';
         }
     }
 
