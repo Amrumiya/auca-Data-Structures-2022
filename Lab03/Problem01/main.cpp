@@ -27,11 +27,34 @@ void printDeck(const vector<int> &deck) {
 
         for(auto card : deck) {
 
-        cout << rank[card % 13] << " of " << suits[card / 13] << "\n";
+        cout << rank[card % 13] << "of " << suits[card / 13] << "\n";
         }
 
 }
 
+vector<vector<int>> readShuffles() {
+
+    int num;
+    cin >> num;
+
+    vector< vector<int>> result(num, vector<int>(52));
+
+    for(int i = 0; i < sz(result); i++) {
+        for(int j = 0; j < 52; j++) {
+            cin >> result[i][j];
+        }
+    }
+    return result;
+}
+
+vector<int> applyShuffleToDeck(vector<int> deck, vector<int> shufle) {
+
+    vector<int> temp(52);
+    for(int i = 0; i < (int) shufle.size(); i++) {
+        temp[i] = deck[shufle[i] - 1];
+    }
+    return temp;
+}
 
 
 int main()
