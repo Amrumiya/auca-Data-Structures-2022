@@ -9,7 +9,7 @@ using namespace std;
 int main()
 {
     iostream::sync_with_stdio(false);
- int numTestCase;
+    int numTestCase;
     cin >> numTestCase;
 
     int firstSalary, secondSalary, thirdSalary;

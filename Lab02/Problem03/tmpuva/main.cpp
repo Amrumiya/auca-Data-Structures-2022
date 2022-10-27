@@ -16,7 +16,7 @@ int main()
 
     for (int i = 0; i < numTestCase; i++) {
         int a, b;
-        cin >>a>>b;
+        cin >> a >> b;
         int total = (a/3) * (b/3);
     cout << total << endl;
 
