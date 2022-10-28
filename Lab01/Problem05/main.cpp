@@ -7,7 +7,7 @@
 
 using namespace std;
 
-template < template T >
+template <typename T >
 void auSwap(T &a, T &b) {
     
     T t = a;
