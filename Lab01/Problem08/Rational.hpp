@@ -23,7 +23,7 @@ public:
 
         }
     
-   cosnt T &num() const
+   const T &num() const
     {
         return mNum;
     }
