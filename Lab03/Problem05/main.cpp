@@ -8,6 +8,7 @@ using namespace std;
 
 
     class Computer{
+
             vector<int> registers;
             vector<int> memory;
             int instructionPointer;
@@ -144,10 +145,7 @@ using namespace std;
 
                 comp.read();
         
-        cout << comp.run()<< endl;
-        cout << '\n';
-    
-        
+              cout << comp.run()<< endl;
         }
     }
 
