@@ -31,6 +31,7 @@ TEST_CASE("pop_back()") {
     vector<int> num3 = {1, 2, 3, 4, 5};
     num3.pop_back();
     
-    REQUIRE(sz(num3) == sz(num3));
+    REQUIRE(sz(num3) == 4);
 
 }
+
