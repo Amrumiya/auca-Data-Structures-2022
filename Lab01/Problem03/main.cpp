@@ -13,7 +13,6 @@ int main()
 
     int nGrades = 0;
     double sum = 0;
-    int grade = 0;
 
     for (int grade; cin >> grade;) {
         ++nGrades;

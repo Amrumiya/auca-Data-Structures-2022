@@ -14,8 +14,11 @@ int main()
     for(string line; getline(cin, line);) {
 
         string buff;
-        for(auto c: line) {
-            if(isalpha(c)) {
+        for(auto c: line) 
+        {
+            if(isalpha(c)) 
+            {
+
                 buff += tolower(c);
             }
         }
@@ -24,9 +27,9 @@ int main()
         string copy = buff;
         reverse(copy.begin(), copy.end());
 
-        cout << (copy == buff) ?  "Palindrome\n" : "not Palindrome\n";
+        cout << (copy == buff ?  "Palindrome\n" : "not Palindrome\n");
 
-        cout << line << endl;
+       // cout << line << endl;
 
     }
 // check for value sematics and reference sematics 
