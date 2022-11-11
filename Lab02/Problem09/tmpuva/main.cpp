@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 
 template <typename C>

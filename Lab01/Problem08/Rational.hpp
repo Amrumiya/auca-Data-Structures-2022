@@ -14,11 +14,13 @@ public:
     Rational()
         : mNum(0), mDen(1) // we can initialize even constants, references + more eff
     {
+
     }
 
     Rational(const T &num)
         : mNum(num), mDen(1) // we can initialize even constants, references + more eff
     {
+        
     }
 
     Rational(const T &num, const T &den)

@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 
 template <typename C>
@@ -6,7 +5,8 @@ int sz(const C &c) { return static_cast<int>(c.size()); }
 
 using namespace std;
 
-void computeDigits(int n , int &sum , int &count) {
+void computeDigits(int n , int &sum , int &count) 
+{
 
     sum = 0;
     count = 0;
@@ -20,7 +20,8 @@ void computeDigits(int n , int &sum , int &count) {
 }
 
 
-int solve(int n) {
+int solve(int n) 
+{
 
     int sumOfDigigts;
     int numOfDigits;

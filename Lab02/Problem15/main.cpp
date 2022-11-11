@@ -9,7 +9,9 @@ using namespace std;
 int Search(vector<int> num) {
     int max = 1;
     for (int i = 0; i < (int) num.size(); i++) {
+
         if (num[i] > max) max = num[i];
+        
     }
     return max;
 }

@@ -1,80 +1,85 @@
-
 #include <bits/stdc++.h>
-
-template <typename C>
-int sz(const C &c) { return static_cast<int>(c.size()); }
 
 using namespace std;
 
-vector<int> createDeck()
-{
-    vector<int> deck(52);
-    for(int i = 0; i < sz(deck); i++) {
-        deck[i] = i;
-    }
-    return deck;
-}
-
-void printDeck(const vector<int> &deck) {
-        static vector<string> suits = {"Clubs", "Dimonds", "Hearts", "Spades"};
-        static vector<string> rank = {"1", "2", "3", "4", "5", "6", "7","8","9","10","11","12", "13"};
-
-    /*for(int i = 0; i < sz(deck); i++) 
-    {
-        cout << rank[i % 13] << "of" << suits[cards / 13] << "\n";
-    }
-    */
-
-        for(auto card : deck) {
-
-        cout << rank[card % 13] << " of " << suits[card / 13] << "\n";
-        }
-
-}
-
-vector<vector<int>> readShuffles() {
-
-    int num;
-    cin >> num;
-
-    vector< vector<int>> result(num, vector<int>(52));
-
-    for(int i = 0; i < sz(result); i++) {
-        for(int j = 0; j < 52; j++) {
-            cin >> result[i][j];
-        }
-    }
-    return result;
-}
-
-vector<int> applyShuffleToDeck(vector<int> deck, vector<int> shufle) {
-
-    vector<int> temp(52);
-    for(int i = 0; i < (int) shufle.size(); i++) {
-        temp[i] = deck[shufle[i] - 1];
-    }
-    return temp;
-}
-
+vector<vector<int>> readShuffle();
+vector<int> createDeck();
+void applyShuffleToDeck(vector<int> &deck, const vector<int> &shuffle);
+void printDeck(const vector<int> &deck);
 
 int main()
 {
-    iostream::sync_with_stdio(false);
+    int testCases;
+    cin >> testCases;
 
-    int TestCase;
-    cin >> TestCase;
-    for(int i = 0; i < TestCase; TestCase++) {
+    for (int test = 0; test < testCases; ++test)
+    {
+        auto shuffles = readShuffle();
+        auto deck = createDeck();
 
-      auto suffles = readShuffles();
-      auto deck = createDeck();
-
-        for(string line; getline(cin, line) && !(line.empty());)
+        for (string line; getline(cin, line) && !line.empty();)
         {
-            int ToInt = stoi(line);            
-            applyShuffleToDeck(deck, suffles[ToInt - 1]);
+            int c = stoi(line);
+            applyShuffleToDeck(deck, shuffles[c - 1]);
         }
 
-        if(TestCase != 0) cout << "\n";
+        if (test != 0)
+        {
+            cout << '\n';
+        }
+
         printDeck(deck);
+    }
+}
+
+vector<vector<int>> readShuffle()
+{
+    int n;
+    cin >> n;
+
+    vector<vector<int>> r(n, vector<int>(52));
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < 52; j++)
+        {
+            cin >> r[i][j];
+        }
+    }
+
+    cin.ignore(1024, '\n');
+    return r;
+}
+
+vector<int> createDeck()
+{
+    vector<int> result(52);
+
+    for (int i = 0; i < 52; ++i)
+    {
+        result[i] = i;
+    }
+
+    return result;
+}
+
+void printDeck(const vector<int> &deck)
+{
+    static vector<string> ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
+    static vector<string> suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
+
+    for (auto card : deck)
+    {
+        cout << ranks[card % 13] << " of " << suits[card / 13] << endl;
+    }
+}
+
+void applyShuffleToDeck(vector<int> &deck, const vector<int> &shuffle)
+{
+    auto tVector = deck;
+
+    for (int i = 0; i < (int)shuffle.size(); i++)
+    {
+        deck[i] = tVector[shuffle[i] - 1];
     }
 }
