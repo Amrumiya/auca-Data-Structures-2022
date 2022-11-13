@@ -11,12 +11,22 @@ using namespace std;
 
 TEST_CASE("Default constructor")
 {
-    BigInt a;
+    BigInt x;
 
     ostringstream sout;
-    sout << a;
+    sout << x;
   
     REQUIRE(sout.str() == "0");
+
+    vector<BigInt> v(5);
+    for(const auto &e : v)
+    {
+        ostringstream sout2;
+        sout2 << e;
+        REQUIRE(sout2.str() == "0");
+
+    }
+
 }
 
 
