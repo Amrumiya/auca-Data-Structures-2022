@@ -49,7 +49,7 @@ TEST_CASE("Constructor with string")
     }
     SUBCASE("+0")
     {
-        BigInt x("0+");
+        BigInt x("+0");
         sout << x;
 
         REQUIRE(sout.str() == "0");
@@ -59,7 +59,7 @@ TEST_CASE("Constructor with string")
         BigInt x("-0");
         sout << x;
 
-        REQUIRE(sout.str() == "0");
+        REQUIRE(sout.str() == "-0");
     }
     SUBCASE("Case 3")
     {
