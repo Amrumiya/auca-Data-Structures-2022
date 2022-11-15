@@ -7,6 +7,9 @@ class BigInt
    friend std::ostream &operator<<(std::ostream &out, const BigInt &x);
    friend bool operator==(const BigInt &a, const BigInt &b);
    friend bool operator!=(const BigInt &a, const BigInt &b);
+   friend bool operator>=(const BigInt &a, const BigInt &b);
+   friend bool operator<=(const BigInt &a, const BigInt &b);
+   friend bool operator>(const BigInt &a, const BigInt &b);
 
     std::vector<int> mDigits;
     bool mIsNegative;
@@ -70,6 +73,24 @@ bool operator==(const BigInt &a, const BigInt &b)
 
 bool operator!=(const BigInt &a, const BigInt &b)
 {
-    return !( a == b);
+    return !(a == b);
 }
 
+inline bool operator<=(const BigInt &a, const BigInt &b)
+{
+    return !(b < a);
+}
+
+inline bool operator>=(const BigInt &a, const BigInt &b)
+{
+    return !(a < b);
+}
+
+inline bool operator>(const BigInt &a, const BigInt &b)
+{
+    if(a == b)
+    {
+        return false;
+    }
+    return !(a < b);
+}
