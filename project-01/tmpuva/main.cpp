@@ -101,6 +101,32 @@ TEST_CASE("Less than or equal ")
     }
 }
 
+TEST_CASE("Less")
+{
+    ostringstream sout;
+
+    SUBCASE(" -1 and 2")
+    {
+        BigInt x("-1");
+        BigInt y("2");
+
+        REQUIRE(x < y);
+    }
+}
+
+TEST_CASE("Greater")
+{
+    ostringstream sout;
+
+    SUBCASE("1 and 2")
+    {
+        BigInt x("1");
+        BigInt y("2");
+
+        REQUIRE(y > x);
+    }
+}
+
 
 
 

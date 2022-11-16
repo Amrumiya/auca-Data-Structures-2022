@@ -88,7 +88,7 @@ inline bool operator<(const BigInt &a, const BigInt &b)
         return true;
     if (!(a.mIsNegative) && b.mIsNegative)
         return false;
-    if (!(a.mIsNegative) && (b.mIsNegative))
+    if (!(a.mIsNegative) && !(b.mIsNegative))
         return (BigInt::CompValue(a, b) < 0);
 
     return (BigInt::CompValue(a, b) > 0);
