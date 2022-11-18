@@ -7,7 +7,6 @@ template <typename C>
 int sz(const C &c) { return static_cast<int>(c.size()); }
 
 using namespace std;
-
 /*
 TEST_CASE("Default constructor")
 {
@@ -15,27 +14,26 @@ TEST_CASE("Default constructor")
 
     ostringstream sout;
     sout << x;
-  
+
     REQUIRE(sout.str() == "0");
 
     vector<BigInt> v(5);
-    for(const auto &e : v)
+    for (const auto &e : v)
     {
         ostringstream sout2;
         sout2 << e;
         REQUIRE(sout2.str() == "0");
-
     }
 }
 
 TEST_CASE("Constructor with string")
 {
     ostringstream sout;
-    SUBCASE("Positive number") 
+    SUBCASE("Positive number")
     {
-    BigInt x("123456789123456789");
-    sout << x;
-    REQUIRE(sout.str() == "123456789123456789" );
+        BigInt x("123456789123456789");
+        sout << x;
+        REQUIRE(sout.str() == "123456789123456789");
     }
     SUBCASE("Negative number")
     {
@@ -43,6 +41,13 @@ TEST_CASE("Constructor with string")
         sout << x;
         REQUIRE(sout.str() == "-123");
     }
+    SUBCASE("+123")
+    {
+        BigInt x("+123");
+        sout << x;
+        REQUIRE(sout.str() == "123");
+    }
+
     SUBCASE("Empty string")
     {
         REQUIRE_THROWS_AS(BigInt(""), runtime_error);
@@ -59,11 +64,58 @@ TEST_CASE("Constructor with string")
         BigInt x("-0");
         sout << x;
 
-        REQUIRE(sout.str() == "-0");
+        REQUIRE(sout.str() == "0");
+    }
+    SUBCASE("+")
+    {
+        REQUIRE_THROWS_AS(BigInt("+"), runtime_error);
+    }
+    SUBCASE("-")
+    {
+        REQUIRE_THROWS_AS(BigInt("-"), runtime_error);
+    }
+    SUBCASE("Wrong number")
+    {
+        REQUIRE_THROWS_AS(BigInt("1234sd12"), runtime_error);
+        REQUIRE_THROWS_AS(BigInt("1234--12"), runtime_error);
+        REQUIRE_THROWS_AS(BigInt("1234sdw12"), runtime_error);
+
     }
 }
-*/
-TEST_CASE("Greater or Equal") 
+TEST_CASE("Checking number with sign")
+{
+    SUBCASE("positive and positive")
+    {
+        BigInt x("+123");
+        BigInt y("+00000123");
+
+        REQUIRE(x == y);
+    }
+    SUBCASE("negative and positive")
+    {
+        BigInt x("-123");
+        BigInt y("+00000123");
+
+        REQUIRE(x != y);
+    }
+    SUBCASE("positive and negative ")
+    {
+        BigInt x("+123");
+        BigInt y("-00000123");
+
+        REQUIRE(x != y);
+    }
+    SUBCASE("negative and negative")
+    {
+        BigInt x("-123");
+        BigInt y("-00000123");
+
+        REQUIRE(x == y);
+    }
+}
+
+
+TEST_CASE("Greater or Equal")
 {
     ostringstream sout;
     SUBCASE("-10 and -10")
@@ -126,10 +178,21 @@ TEST_CASE("Greater")
         REQUIRE(y > x);
     }
 }
+*/
 
+TEST_CASE("postive and positive, test #3")
+{
+    ostringstream sout;
+    for(int x = 0; x <= 1000; x++)
+    {
+        for(int y = 0; y <= 1000; y++)
+        {
+            BigInt a(to_string(x));
+            BigInt b(to_string(y));
+            sout << a + b;
 
-
-
-
-
-
+            REQUIRE(sout.str() == to_string(x + y));
+            sout.str("");
+        }
+    }
+}

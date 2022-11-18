@@ -11,6 +11,7 @@ class BigInt
     friend bool operator>=(const BigInt &a, const BigInt &b);
     friend bool operator<=(const BigInt &a, const BigInt &b);
     friend bool operator<(const BigInt &a, const BigInt &b);
+    friend BigInt operator+(const BigInt &x, const BigInt &y);
 
     static int CompValue(const BigInt &a, const BigInt &b)
     {
@@ -47,25 +48,56 @@ public:
             throw std::runtime_error("BigInt : empty string");
         }
         size_t i = 0;
-        if (value[i] == '-' || value[i] == '+')
+        if (!value.empty() && (value[i] == '-' || value[i] == '+'))
         {
             mIsNegative = value[i] == '-';
             i++;
         }
 
-        while (i + 1 != value.size() && value[i] == '0')
+        while (i + 1 < value.size() && value[i] == '0')
         {
             ++i;
         }
 
-        for (; i != value.size(); i++)
+        for (; i < value.size() && isdigit(value[i]); i++)
         {
-            if (!isdigit(value[i]))
-            {
-                throw std::runtime_error("BigInt: Incorrect string value");
-            }
             mDigits.push_back(value[i] - '0');
         }
+        if (i < value.size() || mDigits.empty())
+        {
+            throw std::runtime_error("BigInt: Incorrect string representation");
+        }
+        if (mDigits.size() == 1 && mDigits[0] == 0)
+            mIsNegative = false;
+    }
+
+    static BigInt addAbsValues(const BigInt &x, const BigInt &y)
+    {
+        auto itX = x.mDigits.rbegin();
+        auto itY = y.mDigits.rbegin();
+
+        BigInt z;
+        z.mDigits.resize(std::max(x.mDigits.size(), y.mDigits.size()) + 1);
+        auto itZ = z.mDigits.rbegin();
+
+        int carry = 0;
+        while (itX != x.mDigits.rend() || itY != y.mDigits.rend())
+        {
+            int s = carry;
+            if (itX != x.mDigits.rend())
+            {
+                s += *itX;
+                *itX++;
+            }
+            if (itY != y.mDigits.rend())
+            {
+                s += *itY;
+                *itY++;
+            }
+            *itZ = s % 10;
+            carry = (s > 9) ? 1 : 0;
+        }
+        return z;
     }
 };
 
@@ -123,3 +155,7 @@ inline bool operator>(const BigInt &a, const BigInt &b)
     return !(a < b);
 }
 
+inline BigInt operator+(const BigInt &x, const BigInt &y)
+{
+    return BigInt::addAbsValues(x,y);
+}
