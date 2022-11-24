@@ -180,19 +180,35 @@ TEST_CASE("Greater")
 }
 */
 
-TEST_CASE("postive and positive, test #3")
+TEST_CASE("Adding")
 {
     ostringstream sout;
-    for(int x = 0; x <= 1000; x++)
+    SUBCASE("postive and positive, test #3")
     {
-        for(int y = 0; y <= 1000; y++)
+        BigInt x("999");
+        BigInt y("1");
+        sout << x + y;
+        REQUIRE(sout.str() == "1000");
+    }
+    SUBCASE("positive and positive, test #1")
+    {
+        BigInt x("193");
+        BigInt y("59");
+        sout << x + y;
+        REQUIRE(sout.str() == "252");
+    }
+    SUBCASE("positive and positive, test #2")
+    {
+        for (int x = 0; x <= 1000; x++)
         {
-            BigInt a(to_string(x));
-            BigInt b(to_string(y));
-            sout << a + b;
-
-            REQUIRE(sout.str() == to_string(x + y));
-            sout.str("");
+            for (int y = 0; y <= 1000; y++)
+            {
+                BigInt a(to_string(x));
+                BigInt b(to_string(y));
+                sout << a + b;
+                REQUIRE(sout.str() == to_string(x + y));
+                sout.str("");
+            }
         }
     }
 }
@@ -239,8 +255,8 @@ TEST_CASE("Subtraction")
         REQUIRE(x1 - y1 == 1024 - 526);
 
     //    BigInt x2(526);
-      //  BigInt y2(1024);
-    
+    //    BigInt y2(1024);
+
 
     }
 }

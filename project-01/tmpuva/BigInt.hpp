@@ -118,6 +118,13 @@ class BigInt
         if (mDigits.size() == 1 && mDigits[0] == 0)
             mIsNegative = false;
     }
+    
+    BigInt(long long x) 
+
+        : BigInt(std::to_string(x))
+    {
+
+    }
 
     static BigInt addAbsValues(const BigInt &x, const BigInt &y)
     {
@@ -135,12 +142,12 @@ class BigInt
             if (itX != x.mDigits.rend())
             {
                 s += *itX;
-                *itX++;
+                itX++;
             }
             if (itY != y.mDigits.rend())
             {
                 s += *itY;
-                *itY++;
+                 itY++;
             }
             *itZ = s % 10;
             carry = (s > 9) ? 1 : 0;
@@ -149,11 +156,6 @@ class BigInt
         if(carry != 0) *itZ = carry;
         if(z.mDigits.size() > 1 && z.mDigits.front() == 0) z.mDigits.erase(z.mDigits.begin());
         return z;
-    }
-    BigInt(long long x) 
-        : BigInt(std::to_string(x))
-    {
-
     }
 };
 
@@ -213,7 +215,7 @@ inline bool operator>(const BigInt &a, const BigInt &b)
 
 inline BigInt operator+(const BigInt &x, const BigInt &y)
 {
-    if(!x.mIsNegative && y.mIsNegative)
+    if(!x.mIsNegative && !y.mIsNegative)
     return BigInt::addAbsValues(x,y);
 
     throw std::runtime_error("not implemented yet");
