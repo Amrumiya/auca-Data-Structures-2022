@@ -196,3 +196,52 @@ TEST_CASE("postive and positive, test #3")
         }
     }
 }
+
+/*
+TEST_CASE("Subtraction")
+{
+    SUBCASE("positive-negative")
+    {
+        BigInt x1(3);
+        BigInt y1(-2);
+        REQUIRE(x1 - y1 = 5);
+
+        for(int x2 = 0; x2 <= 100; ++x2)
+        {
+            for(int y2 = -100; y2 < 0; ++y2)
+            {
+                BigInt a(x2);
+                BigInt b(y2);
+                REQUIRE(a - b == x2 - y2);
+            }
+        }
+    }
+    SUBCASE("negative-positive")
+    {
+        BigInt x1(-3);
+        BigInt y1(2);
+        REQUIRE(x1 - y1 = -5);
+
+        for(int x2 = -100; x2 <= 0; ++x2)
+        {
+            for(int y2 = 0; y2 < 100; ++y2)
+            {
+                BigInt a(x2);
+                BigInt b(y2);
+                REQUIRE(a - b == x2 - y2);
+            }
+        }
+    }
+    SUBCASE("poistive-positive ")
+    {
+        BigInt x1(1024);
+        BigInt y1(526);
+        REQUIRE(x1 - y1 == 1024 - 526);
+
+    //    BigInt x2(526);
+      //  BigInt y2(1024);
+    
+
+    }
+}
+*/
