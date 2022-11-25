@@ -114,6 +114,24 @@ TEST_CASE("Checking number with sign")
     }
 }
 
+TEST_CASE("Equal")
+{
+    SUBCASE("two nums")
+    {
+    BigInt x("2");
+    BigInt y("2");
+
+    REQUIRE( x == y);
+    }
+    SUBCASE("3 and 3")
+    {
+        BigInt x("3");
+        BigInt y("3");
+
+        REQUIRE(x == y);
+
+    }
+}
 
 TEST_CASE("Greater or Equal")
 {
@@ -178,8 +196,20 @@ TEST_CASE("Greater")
         REQUIRE(y > x);
     }
 }
-*/
 
+
+TEST_CASE("BigInt with long long")
+{
+    ostringstream sout;
+    SUBCASE("-9223372036775808")
+    {
+        BigInt x(numeric_limits<long long>::min());
+        sout << x;
+        REQUIRE(sout.str() == "-9223372036854775808");
+    }
+}
+*/
+/*
 TEST_CASE("Adding")
 {
     ostringstream sout;
@@ -197,7 +227,8 @@ TEST_CASE("Adding")
         sout << x + y;
         REQUIRE(sout.str() == "252");
     }
-    SUBCASE("positive and positive, test #2")
+    */
+    /*SUBCASE("positive and positive, test #2")
     {
         for (int x = 0; x <= 1000; x++)
         {
@@ -210,9 +241,25 @@ TEST_CASE("Adding")
                 sout.str("");
             }
         }
+    }*/
+    /*
+    SUBCASE("negative and positive")
+    {
+        BigInt x("-5");
+        BigInt y("4");
+        sout << x + y;
+        REQUIRE(sout.str() == "-1");
+    }
+    SUBCASE("positive and negative")
+    {
+        BigInt x("5");
+        BigInt y("-2");
+        sout << x + y;
+        REQUIRE(sout.str() == "3");
+
     }
 }
-
+*/
 /*
 TEST_CASE("Subtraction")
 {
@@ -261,3 +308,55 @@ TEST_CASE("Subtraction")
     }
 }
 */
+
+TEST_CASE("input operator")
+{
+    ostringstream sout;
+    SUBCASE("correct input #1")
+    {
+        istringstream sinp("123");
+        BigInt x;
+        sinp >> x;
+        REQUIRE(sinp.eof());
+        REQUIRE(x == 123);
+    }
+    SUBCASE("correct input #2")
+    {
+        istringstream sinp("  123");
+        int x;
+        sinp >> x;
+        REQUIRE(sinp.good());
+        REQUIRE(sinp.eof());
+        REQUIRE(x ==  123);
+    }
+    
+    SUBCASE("correct input #3")
+    {
+        istringstream sinp("123x321");
+        int x;
+        char ch;
+        sinp >> x >> ch;
+        REQUIRE(sinp.good());
+        REQUIRE(x == 123);
+        REQUIRE(ch == 'x');
+    }
+    SUBCASE("correct input #4")
+    {
+        istringstream sinp(" +123");
+        int x;
+        sinp >> x;
+        REQUIRE(sinp.eof());
+        REQUIRE(x == 123);
+    }
+    SUBCASE("correct input #5")
+    {
+        istringstream sinp(" -123");
+        int x;
+        sinp >> x;
+        REQUIRE(sinp.eof());
+        REQUIRE(x == -123);
+    }
+}
+
+
+

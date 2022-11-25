@@ -32,55 +32,68 @@ class BigInt
 
     static int cmpAbsValues(const BigInt &x, const BigInt &y)
     {
-        if(x.mDigits.size() < y.mDigits.size())
+        if (x.mDigits.size() < y.mDigits.size())
         {
-            return - 1;
+            return -1;
         }
-        if(x.mDigits.size() > y.mDigits.size())
+        if (x.mDigits.size() > y.mDigits.size())
         {
             return 1;
         }
-        
-        for(size_t i = 0; i < x.mDigits.size(); ++i)
+
+        for (size_t i = 0; i < x.mDigits.size(); ++i)
         {
-            if(x.mDigits[i] != y.mDigits[i])
+            if (x.mDigits[i] != y.mDigits[i])
             {
                 return x.mDigits[i] - y.mDigits[i];
             }
         }
-        
+
         return 0;
     }
 
     static BigInt subAbsValues(const BigInt &x, const BigInt &y)
     {
-        auto itX = x.mDigits.rbegin();
-        BigInt z;
-        z.mDigits.resize(x.mDigits.size());
-        auto itZ = z.mDigits.rbegin();
+        BigInt r;
+        r.mDigits.clear();
 
-        int borrow = 0;
-        for(auto itY = y.mDigits.rbegin(); itY != y.mDigits.rend(); ++itY)
+        auto itX = x.mDigits.rbegin();
+        auto itY = y.mDigits.rbegin();
+
+        int taken = 0;
+        while (itX != x.mDigits.rend())
         {
-            int d = *itX - borrow - *itY;
-            if(d < 0)
+            int diff = *itX - taken;
+            itX++;
+
+            if (itY != y.mDigits.rend())
             {
-                d += 10;
-                borrow = 1;
+                diff -= *itY;
+                itY++;
+            }
+            if (diff < 0)
+            {
+                diff += 10;
+                taken = 1;
             }
             else
             {
-                borrow = 0;
+                taken = 0;
             }
-            *itZ = d;
+            r.mDigits.push_back(diff);
         }
-        return z;
+        while (r.mDigits.size() > 1 && r.mDigits.back() == 0)
+        {
+            r.mDigits.pop_back();
+        }
+        std::reverse(r.mDigits.begin(), r.mDigits.end());
+        return r;
     }
 
     std::vector<int> mDigits;
     bool mIsNegative;
 
- public:
+public:
     BigInt()
         : mIsNegative(false)
     {
@@ -118,12 +131,11 @@ class BigInt
         if (mDigits.size() == 1 && mDigits[0] == 0)
             mIsNegative = false;
     }
-    
-    BigInt(long long x) 
+
+    BigInt(long long x)
 
         : BigInt(std::to_string(x))
     {
-
     }
 
     static BigInt addAbsValues(const BigInt &x, const BigInt &y)
@@ -147,14 +159,16 @@ class BigInt
             if (itY != y.mDigits.rend())
             {
                 s += *itY;
-                 itY++;
+                itY++;
             }
             *itZ = s % 10;
             carry = (s > 9) ? 1 : 0;
             itZ++;
         }
-        if(carry != 0) *itZ = carry;
-        if(z.mDigits.size() > 1 && z.mDigits.front() == 0) z.mDigits.erase(z.mDigits.begin());
+        if (carry != 0)
+            *itZ = carry;
+        if (z.mDigits.size() > 1 && z.mDigits.front() == 0)
+            z.mDigits.erase(z.mDigits.begin());
         return z;
     }
 };
@@ -170,6 +184,34 @@ inline std::ostream &operator<<(std::ostream &out, const BigInt &x)
     }
 
     return out;
+}
+
+inline std::istream &operator>>(std::istream &inp, BigInt &x)
+{
+    char ch;
+    if(!(inp >> ch))
+    {
+        return inp;
+    }
+
+    if(!(std::isdigit(ch) || ch == '+' || ch == '-'))
+    {
+        inp.putback(ch);
+        inp.setstate(std::ios_base::failbit);
+        return inp;
+    }
+
+    std::string s;
+    s += ch;
+
+    while(inp.get(ch) && std::isdigit(ch))
+    {
+        s += ch;
+    }
+    x = BigInt(s);
+
+    return inp;
+
 }
 
 inline bool operator<(const BigInt &a, const BigInt &b)
@@ -215,17 +257,32 @@ inline bool operator>(const BigInt &a, const BigInt &b)
 
 inline BigInt operator+(const BigInt &x, const BigInt &y)
 {
-    if(!x.mIsNegative && !y.mIsNegative)
-    return BigInt::addAbsValues(x,y);
+    if (!x.mIsNegative && !y.mIsNegative)
+        return BigInt::addAbsValues(x, y);
+    int cmp = BigInt::cmpAbsValues(x, y);
+    if (cmp == 0)
+        return BigInt();
+    if (cmp > 0)
+    {
+        BigInt r = BigInt::subAbsValues(x, y);
+        r.mIsNegative = x.mIsNegative;
+        return r;
+    }
+    else if (cmp < 0)
+    {
+        BigInt r = BigInt::subAbsValues(y, x);
+        r.mIsNegative = y.mIsNegative;
+        return r;
+    }
+    return BigInt();
 
     throw std::runtime_error("not implemented yet");
 }
 
 inline BigInt operator-(const BigInt &x, const BigInt &y)
 {
-    if(!x.mIsNegative && y.mIsNegative)
-    return BigInt::addAbsValues(x,y);
+    if (!x.mIsNegative && !y.mIsNegative)
+        return BigInt::addAbsValues(x, y);
 
     throw std::runtime_error("not implemented yet");
 }
-
