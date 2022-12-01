@@ -54,40 +54,55 @@ class BigInt
 
     static BigInt subAbsValues(const BigInt &x, const BigInt &y)
     {
-        BigInt r;
-        r.mDigits.clear();
-
         auto itX = x.mDigits.rbegin();
-        auto itY = y.mDigits.rbegin();
 
-        int taken = 0;
-        while (itX != x.mDigits.rend())
+        BigInt z;
+        z.mDigits.resize(x.mDigits.size());
+        auto itZ = z.mDigits.rbegin();
+
+        int borrow = 0;
+        for (auto itY = y.mDigits.rbegin(); itY != y.mDigits.rend();)
         {
-            int diff = *itX - taken;
-            itX++;
-
-            if (itY != y.mDigits.rend())
+            int d = *itX - borrow - *itX;
+            if (x < 0)
             {
-                diff -= *itY;
-                itY++;
-            }
-            if (diff < 0)
-            {
-                diff += 10;
-                taken = 1;
+                d += 10;
+                borrow = 1;
             }
             else
             {
-                taken = 0;
+                borrow = 0;
             }
-            r.mDigits.push_back(diff);
+            *itZ = d;
         }
-        while (r.mDigits.size() > 1 && r.mDigits.back() == 0)
+
+        for (; borrow != 0; ++itX, ++itZ)
         {
-            r.mDigits.pop_back();
+            int d = *itX - borrow;
+            if (d < 0)
+            {
+                d += 10;
+                borrow = 1;
+            }
+            else
+            {
+                borrow = 0;
+            }
+            *itZ = d;
         }
-        std::reverse(r.mDigits.begin(), r.mDigits.end());
-        return r;
+
+        z.eraseLeadingZero();
+        return z;
+    }
+
+    void eraseLeadingZero()
+    {
+        auto it = mDigits.begin();
+        while (it + 1 != mDigits.end() && *it == 0)
+        {
+            ++it;
+        }
+        mDigits.erase(mDigits.begin(), it);
     }
 
     std::vector<int> mDigits;
@@ -189,12 +204,12 @@ inline std::ostream &operator<<(std::ostream &out, const BigInt &x)
 inline std::istream &operator>>(std::istream &inp, BigInt &x)
 {
     char ch;
-    if(!(inp >> ch))
+    if (!(inp >> ch))
     {
         return inp;
     }
 
-    if(!(std::isdigit(ch) || ch == '+' || ch == '-'))
+    if (!(std::isdigit(ch) || ch == '+' || ch == '-'))
     {
         inp.putback(ch);
         inp.setstate(std::ios_base::failbit);
@@ -204,14 +219,20 @@ inline std::istream &operator>>(std::istream &inp, BigInt &x)
     std::string s;
     s += ch;
 
-    while(inp.get(ch) && std::isdigit(ch))
+    while (inp.get(ch) && std::isdigit(ch))
     {
         s += ch;
     }
+
+    if (s.size() == 1 && (s[0] == '+' || s[0] == '-'))
+    {
+        inp.setstate(std::ios_base::failbit);
+        return inp;
+    }
+
     x = BigInt(s);
 
     return inp;
-
 }
 
 inline bool operator<(const BigInt &a, const BigInt &b)
@@ -281,8 +302,22 @@ inline BigInt operator+(const BigInt &x, const BigInt &y)
 
 inline BigInt operator-(const BigInt &x, const BigInt &y)
 {
-    if (!x.mIsNegative && !y.mIsNegative)
+    if (!x.mIsNegative && y.mIsNegative)
         return BigInt::addAbsValues(x, y);
 
+    if (x.mIsNegative && !y.mIsNegative)
+    {
+        BigInt r = BigInt::addAbsValues(x, y);
+        r.mIsNegative = true;
+        return r;
+    }
+    if (!x.mIsNegative && !y.mIsNegative)
+    {
+        int cmp = BigInt::cmpAbsValues(x, y);
+        if (cmp >= 0)
+        {
+            return BigInt::subAbsValues(x, y);
+        }
+    }
     throw std::runtime_error("not implemented yet");
 }
