@@ -105,16 +105,16 @@ void p0102()
 void p0201()
 {
     vector<int> a = {3, 1, 20, 4, 7, 0, 5};
-    
-        auto it = find_if(begin(a), end(a), IsEven());
-        if (it != end(a))
-        {
-            cout << *it << " found. Its index is " << it - begin(a) << "\n";
-        }
-        else
-        {
-            cout << " not found\n";
-        }
+
+    auto it = find_if(begin(a), end(a), IsEven());
+    if (it != end(a))
+    {
+        cout << *it << " found. Its index is " << it - begin(a) << "\n";
+    }
+    else
+    {
+        cout << " not found\n";
+    }
 }
 
 void p0202()
@@ -136,14 +136,13 @@ struct GreaterThan
 {
     int mX;
     GreaterThan(int x) : mX(x){};
-    
+
     bool operator()(int n) const
     {
         return n > mX;
     }
     /* data */
 };
-
 
 void p03()
 {
@@ -154,9 +153,9 @@ void p03()
     cin >> x;
 
     auto it = find_if(begin(a), end(a),
-                [x](auto n)
-                {return n > x;});
-    if(it != end(a))
+                      [x](auto n)
+                      { return n > x; });
+    if (it != end(a))
     {
         cout << *it << " found. Its index is " << it - begin(a) << "\n";
     }
@@ -165,9 +164,9 @@ void p03()
         cout << "No even number are found\n";
     }
 
-      auto it2 = find_if(begin(a), end(a),
-               GreaterThan(x));
-    if(it2 != end(a))
+    auto it2 = find_if(begin(a), end(a),
+                       GreaterThan(x));
+    if (it2 != end(a))
     {
         cout << *it2 << " found. Its index is " << it2 - begin(a) << "\n";
     }
@@ -182,42 +181,39 @@ void p06()
     vector<Student> students;
     string name;
     double gpa;
-    while(cin >> name >> gpa)
+    while (cin >> name >> gpa)
     {
         students.emplace_back(name, gpa);
     }
 
     sort(begin(students), end(students),
-    [](const Student &s1, const Student &s2)
-    { return s1.mName < s2.mName; });
+         [](const Student &s1, const Student &s2)
+         { return s1.mName < s2.mName; });
     cout << fixed << showpoint << setprecision(2);
-    for(const auto &s : students)
+    for (const auto &s : students)
     {
         cout << s.mName << ", " << s.mGpa << endl;
     }
 
-    sort(begin(students), end(students), 
-            [](const Student &s1, const Student &s2)
-            {return s1.mGpa > s2.mGpa; });
+    sort(begin(students), end(students),
+         [](const Student &s1, const Student &s2)
+         { return s1.mGpa > s2.mGpa; });
     cout << "------" << fixed << showpoint << setprecision(2);
-    for(const auto &s : students)
+    for (const auto &s : students)
     {
         cout << s.mName << ", " << s.mGpa << endl;
     }
 }
 
-
-
 int main()
 {
     iostream::sync_with_stdio(false);
 
-  // p0101();
+    // p0101();
     // p0102();
-   // p0201();
+    // p0201();
 
-  // p06();
+    // p06();
 
-  p03();
-
+    p03();
 }
