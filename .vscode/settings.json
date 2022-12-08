@@ -3,6 +3,9 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "iosfwd": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "forward_list": "c",
+        "list": "c",
+        "ranges": "c"
     }
 }

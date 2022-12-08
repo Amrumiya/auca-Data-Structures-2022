@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+void reverse(int *beg, int *end);
+void printArray(int *beg, int *end);
+
+
 int main(void)
 {
 
@@ -23,11 +28,44 @@ int main(void)
 
     reverse(dynArray, dynArray + n);
 
-    printfArray(dynArray, dynArray + n);
+    printArray(dynArray, dynArray + n);
 
     free(dynArray);
 
 
 
 
+}
+
+void printArray(int *beg, int *end)
+{
+    while (beg != end)
+    {
+        printf(" %d", *beg++);
+    }
+    printf("\n");
+}
+
+void reverse(int *beg, int *end)
+{
+    for (;;)
+    {
+        if (beg == end)
+        {
+            break;
+        }
+
+        --end;
+
+        if (beg == end)
+        {
+            break;
+        }
+
+        int t = *beg;
+        *beg = *end;
+        *end = t;
+
+        ++beg;
+    }
 }

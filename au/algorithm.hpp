@@ -48,7 +48,7 @@ ForwardIter auFindIf(ForwardIter beg, ForwardIter end, UnaryPredicate pread)
 {
     for(; beg != end; ++beg)
     {
-        if(pred(*beg))
+        if(pread(*beg))
         {
             return beg;
         }
@@ -56,3 +56,19 @@ ForwardIter auFindIf(ForwardIter beg, ForwardIter end, UnaryPredicate pread)
     return beg;
 }
 
+
+template<typename Iter, typename Comp>
+Iter auMinElement(Iter beg, Iter end, Comp comp)
+{
+    Iter min = beg;
+    while (beg != end)
+    {
+      if (comp(*beg, *min))
+      {
+          min = beg;
+      }
+      beg++;
+    }
+    return min;
+    
+}
