@@ -179,14 +179,14 @@ void p05()
         v.emplace_back(name, gpa);
     }
 
-    cout << "Bt gpa: "<< endl;
+    cout << "By gpa: "<< endl;
     auto it = min_element(begin(v), begin(v), CmpByVal());
 
     if(it != end(v)) cout << "index : " << it - begin(v) << endl;
     else cout << "not found\n";
 
     cout << "By name: \n";
-    auto itA = min_element(begin(v), end(v), [] (const Student &a, const Student &b){return a.mName < b.mName;});
+    auto itA = auMinElement(begin(v), end(v), [] (const Student &a, const Student &b){return a.mName < b.mName;});
 
     if(itA != end(v)) cout << "index: " << itA - begin(v) << endl;
     else cout << "not found\n"  ;
@@ -197,9 +197,36 @@ void p05()
 
 }
 
+
+void p06()
+{
+
+    vector<Student> v;
+    string name;
+    double gpa;
+
+    while(cin >> name >> gpa)
+    {
+        v.emplace_back(name, gpa);
+    }
+
+    sort(begin(v), end(v), [](const Student &a, const Student &b) { return a.mName < b.mName;});
+
+    cout << fixed << showpoint << setprecision(2);
+    for(const auto &e : v)
+    cout << e.mName <<", " << e.mGpa << endl;
+
+    sort(begin(v), end(v), [] (const Student &a, const Student &b){return a.mGpa < b.mGpa;});
+    cout << "------------------------" << fixed << setprecision(2);
+
+        for(const auto &e : v)
+                cout << e.mName<< ", " << e.mGpa << endl; 
+
+}
+
 int main()
 {
     iostream::sync_with_stdio(false);
 
-    p05();
+    p06();
 }

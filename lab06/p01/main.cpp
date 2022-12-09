@@ -201,6 +201,42 @@ void p04()
     }
 }
 
+struct CmpByVal{
+
+bool operator()(const Student &a, const Student &b)
+{
+   return a.mGpa < b.mGpa;
+}
+
+
+};
+
+void p05()
+{
+
+    vector<Student> v;
+    string name;
+    double gpa;
+
+    while(cin >> name >> gpa)
+    {
+        v.emplace_back(name, gpa);
+    }
+
+    cout << "By gpa: "<< endl;
+    auto it = min_element(begin(v), begin(v), CmpByVal());
+
+    if(it != end(v)) cout << "index : " << it - begin(v) << endl;
+    else cout << "not found\n";
+
+    cout << "By name: \n";
+    auto itA = auMinElement(begin(v), end(v), [] (const Student &a, const Student &b){return a.mName < b.mName;});
+
+    if(itA != end(v)) cout << "index: " << itA - begin(v) << endl;
+    else cout << "not found\n"  ;
+
+}
+
 void p06()
 {
 
