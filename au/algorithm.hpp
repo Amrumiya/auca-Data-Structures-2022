@@ -1,7 +1,7 @@
 #pragma once
 #include <utility>
 
-template<typename T>
+template <typename T>
 void auSwap(T &x, T &y)
 {
     T t = std::move(x);
@@ -9,19 +9,18 @@ void auSwap(T &x, T &y)
     y = std::move(t);
 }
 
-
-
-template<typename BidirectionalIter>
+template <typename BidirectionalIter>
 void auReverse(BidirectionalIter beg, BidirectionalIter end)
 {
-    for(;;)
+    for (;;)
     {
-        if(beg == end) break;
+        if (beg == end)
+            break;
 
         --end;
 
-        if(beg == end)
-        break;
+        if (beg == end)
+            break;
 
         auSwap(*beg, *end);
 
@@ -29,26 +28,26 @@ void auReverse(BidirectionalIter beg, BidirectionalIter end)
     }
 }
 
-
-template<typename ForwardIter, typename Key>
+template <typename ForwardIter, typename Key>
 ForwardIter auFind(ForwardIter beg, ForwardIter end, const Key &key)
 {
-    for(; beg != end; ++beg)
+    for (; beg != end; ++beg)
     {
-        if(*beg == key)
+        if (*beg == key)
         {
             return beg;
         }
     }
     return beg;
 }
+
 
 template <typename ForwardIter, typename UnaryPredicate>
 ForwardIter auFindIf(ForwardIter beg, ForwardIter end, UnaryPredicate pread)
 {
-    for(; beg != end; ++beg)
+    for (; beg != end; ++beg)
     {
-        if(pread(*beg))
+        if (pread(*beg))
         {
             return beg;
         }
@@ -56,19 +55,17 @@ ForwardIter auFindIf(ForwardIter beg, ForwardIter end, UnaryPredicate pread)
     return beg;
 }
 
-
-template<typename Iter, typename Comp>
+template <typename Iter, typename Comp>
 Iter auMinElement(Iter beg, Iter end, Comp comp)
 {
     Iter min = beg;
     while (beg != end)
     {
-      if (comp(*beg, *min))
-      {
-          min = beg;
-      }
-      beg++;
+        if (comp(*beg, *min))
+        {
+            min = beg;
+        }
+        beg++;
     }
     return min;
-    
 }
