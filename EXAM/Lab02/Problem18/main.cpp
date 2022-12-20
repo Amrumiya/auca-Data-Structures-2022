@@ -12,45 +12,6 @@ struct Student
     Student(string &name, double &gpa) : mName(name), mGpa(gpa){};
 };
 
-template <typename ForwardIter, typename Key>
-ForwardIter auFind(ForwardIter beg, ForwardIter end, const Key &key)
-{
-    for (; beg != end; beg++)
-    {
-        if (*beg == key)
-        {
-            return beg;
-        }
-    }
-    return beg;
-}
-
-template <typename ForwardIter, typename Key>
-ForwardIter auFindIf(ForwardIter beg, ForwardIter end, Key pread)
-{
-    for (; beg != end; beg++)
-    {
-        if (pread(*beg))
-            return beg;
-    }
-    return beg;
-}
-
-template <typename Iter, typename Comp>
-Iter auMinElement(Iter beg, Iter end, Comp comp)
-{
-    Iter min = beg;
-    while (beg != end)
-    {
-        if (comp(*beg, *min))
-        {
-            min = beg;
-        }
-        beg++;
-    }
-    return min;
-}
-
 struct IsEven
 {
 
@@ -81,17 +42,86 @@ struct CmpByVal
     }
 };
 
+template<typename ForwardsIter, typename Key>
+ForwardsIter auFind(ForwardsIter beg, ForwardsIter end, const Key &key )
+{
+    while(beg != end)
+    {
+        if(*beg == key)
+        return beg;
+    }
+    return beg;
+}
+
+template<typename ForwardIter, typename UnaryPredicate>
+ForwardIter auFindIf(ForwardIter beg, ForwardIter end, UnaryPredicate pread)
+{
+    for(; beg != end; ++beg)
+    {
+        if(pread(*beg))
+        {
+            return beg;
+        }
+    }
+    return beg;
+}
+
+template<typename Iter>
+Iter auMinElement(Iter beg, Iter end)
+{
+    if(beg == end) return end;
+
+    Iter min = beg++;
+    
+    while(beg != end)
+    {
+        if(*beg < *min)
+        min = beg;
+
+        beg++;
+    }
+    return min;
+
+
+}
+
+
 void p06()
 {
-     vector<int> v = {0, 4, 5, 10, 12, 20, 25, 40};
 
-    
+ vector<int> v = {0, 0, 4, 5, 10, 10, 10, 12, 20, 25, 35, 25,
+25, 40};
 
+for(int x; cin >> x;)
 
+{
+    auto it = equal_range(begin(v), end(v), x);
 
+    if(it.first == it.second) cout << " there are not elements equalt to " << x<< endl;
+    else cout << " number of elements equal to " << x << " are " << it.second - it.first<< endl;
+}
 
+ 
 
+}
 
+template <typename Iter>
+Iter auMinElement(Iter beg, Iter end)
+{
+    if (beg == end)
+        return end;
+
+    Iter min = beg++;
+
+    while (beg != end)
+    {
+        if (*beg < *min)
+        {
+            min = beg;
+        }
+        beg++;
+    }
+    return min;
 }
 
 int main()

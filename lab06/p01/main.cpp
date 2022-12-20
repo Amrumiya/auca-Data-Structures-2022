@@ -425,7 +425,7 @@ void p12()
         }
         else
         {
-            cout << "number of elements equal to x is: " << p.second - p.first << endl;
+            cout << "number of elements equal to x is : " << p.second - p.first << endl;
         }
     }
 }
