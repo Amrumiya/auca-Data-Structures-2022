@@ -5,54 +5,56 @@ int sz(const C &c) { return static_cast<int>(c.size()); }
 
 using namespace std;
 
-bool sortAll(int first, int second);
-int M;
+struct Skill
+{
+    string mName;
+    int mValue;
+    Skill(string &name, int value) : mName(name), mValue(value){};
+};
+
+struct CmpByValue
+{
+    bool operator()(const Skill &a, const Skill &b) const
+    {
+        return a.mName < b.mName;
+    }
+};
 
 int main()
 {
-int N;
 
-while(cin >> N >> M)
-{
-    if(M && N == 0) break;
+    iostream::sync_with_stdio(false);
 
-    cout << N << " " << M << endl;
+    int nSkills;
+    cin >> nSkills;
 
-    vector<int> v;
-    
-    for(int i = 0; i < sz(v); i++)
+    int nDescription;
+    cin >> nDescription;
+
+    vector<Skill> skills;
+    for (int i = 0; i < nSkills; i++)
     {
-        cin >> v[i];
+        string name;
+        cin >> name;
+        int value;
+        cin >> value;
+        skills.emplace_back(name, value);
     }
 
-    sort(begin(v), end(v), sortAll);
+    sort(begin(skills), end(skills), CmpByValue());
 
-    for(int i = 0; i < sz(v); i++)
+    for (int i = 0; i < nDescription; i++)
     {
-        cout << v[i]<< endl;;
-    }
+        int salary = 0;
+        for (string w; cin >> w && w != ".";)
+        {
+            auto it = lower_bound(begin(skills), end(skills), Skill(w, 0), CmpByValue());
 
-
-}
-
-
-
-}
-
-bool sortAll(int first, int second)
-{
-    if(first % M == second % M)
-    {
-        if(abs(first % 2) != abs(second % 2))
-        return abs(first % 2) > abs(second % 2);
-        else if(abs(first % 2) == abs(second % 2) && abs(first % 2) == 1)
-        return first > second;
-        else if(abs(first % 2) == abs(second % 2) && abs(first % 2 == 0))
-        return first < second;
-    }
-    else
-    {
-        return first % M < second % M;
+            if (it != end(skills) && it->mName == w)
+            {
+                salary += it->mValue;
+            }
+        }
+        cout << salary << "\n";
     }
 }
-
