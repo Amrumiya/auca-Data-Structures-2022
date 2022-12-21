@@ -45,7 +45,7 @@ int main()
     for (int i = 0; i < nDescription; i++)
     {
         int salary = 0;
-        for (string w; cin >> w && w != "-";)
+        for (string w; cin >> w && w != ".";)
         {
             auto it = lower_bound(begin(skills), end(skills), Skill(w, 0), CmpSkillByName());
 
