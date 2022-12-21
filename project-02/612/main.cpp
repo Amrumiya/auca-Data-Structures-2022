@@ -47,7 +47,11 @@ int main()
             cout << e.mName << endl;
         }
 
-        
+        if(testcase)
+        {
+            cout << endl;
+        }
+
     }
    
 }
