@@ -38,10 +38,10 @@ int main()
 
     sort(begin(cups), end(cups), [&](const pair<int, string> &l, const pair<int, string> &r)
     {
-        return l.first > r.second;
+        return l.first > r.first;
     });
 
-    for(int i = n; i >= 0; i--)
+    for(int i = n - 1; i >= 0; i--)
     {
         cout << cups[i].second << endl;
     }
