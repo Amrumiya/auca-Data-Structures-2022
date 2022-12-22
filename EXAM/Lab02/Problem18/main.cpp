@@ -5,45 +5,28 @@ int sz(const C &c) { return static_cast<int>(c.size()); }
 
 using namespace std;
 
-
 int main()
 {
-    int t;
-    cin >> t;
-    for(int j = 1; j <= t; j++)
+  vector<string> names;
+  string name;
+  int t;
+  while (cin >> t)
+  {
+    for (int i = 0; i < t; i++)
     {
-        int n;
-        cin >> n;
-        vector<int> r, b;
-        for(int i = 0; i < n; i++)
-        {
-            int num;
-            char s;
-            cin >> num >> s;
-            num--;
-
-            if(s == 'B')
-            {
-                b.push_back(num);
-            }
-            else
-            {
-                r.push_back(num);
-            }
-        }
-
-        sort(r.rbegin(), r.rend());
-        sort(b.rbegin(), b.rend());
-
-        int ans = 0;
-
-        int acR = accumulate(begin(r), begin(r) + min(sz(r), sz(b)), 0);
-        int acB = accumulate(begin(b), begin(b) + min(sz(r), sz(b)), 0);
-
-        ans = acR + acB;
-        cout << "Case #" << j << ":";
-        cout << ans << endl;
-
+      cin >> name;
+      names.push_back(name);
     }
+    stable_sort(begin(names), end(names), [](string first, string second)
+                {
+  if(first[0] != second[0])
+  return first[0] < second[0];
+  else return first[1] < second[1]; });
 
+    for (auto &i : names)
+    {
+      cout << i << endl;
+    }
+    names.clear();
+  }
 }
