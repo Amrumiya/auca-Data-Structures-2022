@@ -7,49 +7,52 @@ using namespace std;
 
 bool sortAll(int first, int second);
 
-int M;
-
 int main()
 {
     iostream::sync_with_stdio(false);
 
     int N;
-
-    while(cin >> N >> M)
+    int M;
+    while (cin >> N >> M)
     {
-        cout << N << " " << M << endl;
 
-        vector<int> v;
-
-        for(int i = 0; i < sz(v); i++ )
+        vector<int> v(N, 0);
+        if (M && N == 0)
         {
-            cin >> v[i];
+            cout << N << " " << M << endl;
+            break;
         }
 
-        sort(begin(v), end(v), sortAll);
+        for (auto &e : v)
+            cin >> e;
 
+        sort(begin(v), end(v), [&](const int a, const int b)
+             {
+                 if (a % M == b % M)
+                 {
+                     if (abs(a) % 2 == abs(b) % 2)
+                     {
+                         if (abs(a) % 2 == 1)
+                             return a > b;
+                         else
+                             return b > a;
+                     }
+                     else 
+                     {
+                        return abs(a) % 2 == 1;
+                     }
+                 }
+                 else
+                 {
+                    return a % M < b % M;
+                 }
+             });
 
-        for(int i = 0; i < sz(v); i++)
+            cout << N << " " << M << endl;
+
+        for(auto &e : v)
         {
-            cout << v[i] << endl;
+            cout << e << "\n";
         }
-    }
-    
-}
-
-bool sortAll(int first , int second)
-{
-    if(first % M == second % M)
-    {
-        if(abs(first % 2) != abs(second % 2))
-        return abs(first % 2) > abs(second % 2);
-        else if(abs(first % 2) == abs(second % 2) && abs(first % 2) == 1)
-        return first > second;
-        else if(abs(first % 2) == abs(second % 2) && abs(first % 2) == 0)
-        return first < second;
-    }
-    else 
-    {
-        return first % M < second % M;
     }
 }
