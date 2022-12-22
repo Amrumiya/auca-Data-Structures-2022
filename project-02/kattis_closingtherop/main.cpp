@@ -10,7 +10,7 @@ int main()
 
   int numTestCase;
   cin >> numTestCase;
-  for(int j = 0; j < numTestCase;j++)
+  for(int j = 1; j <= numTestCase;j++)
   {
     int numTest;
     cin >> numTest;
